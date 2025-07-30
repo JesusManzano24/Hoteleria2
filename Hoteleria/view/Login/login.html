@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Iniciar Sesión</title>
+  <link rel="stylesheet" href="../../css/styles.css" />
+  <link rel="stylesheet" href="../../css/footer.css" />
+  <link rel="icon" href="../../img/logoprueba.png" type="image/x-icon" />
+</head>
+<body>
+  <header>
+    <img id="logo" src="../../img/logoprueba.png" alt="Logo de LuminusCreaCode" width="100"/>
+    <h1>Bienvenido a LuminusCrea Booking</h1>
+    <nav>
+      <a href="../index/index.html">Inicio</a>
+      <a href="../alojamientos/alojamientos.html">Explorar</a>
+      <a href="../contacto/contacto.html">Contacto</a>
+      <a href="../Registro/registro.html">Registrarse</a>
+      <a href="../Login/login.html">Iniciar Sesión</a>
+    </nav>
+  </header>
+
+  <main>
+    <h2>Iniciar Sesión</h2>
+
+    <!-- Mensaje de error -->
+    <div id="errorMsg" style="color:red; margin-bottom:1rem;"></div>
+
+    <!-- Formulario con acción corregida -->
+    <form method="POST" action="login.php">
+      <label for="email">Correo electrónico:</label><br>
+      <input type="email" id="email" name="email" required /><br /><br />
+
+      <label for="password">Contraseña:</label><br>
+      <input type="password" id="password" name="password" required /><br /><br />
+
+      <button type="submit">Acceder</button>
+      <p style="margin-top: 15px;">
+        ¿No tienes cuenta?
+        <a href="../Registro/registro.html">Regístrate aquí</a>
+      </p>
+    </form>
+  </main>
+
+  <footer class="site-footer">
+  <div class="footer-content">
+    <p class="footer-title"><strong>O también puedes escribirnos a:</strong></p>
+    <p class="footer-contact">Email: <a href="mailto:soporte@luminuscreacode.com" class="footer-link">soporte@luminuscreacode.com</a></p>
+    <p class="footer-contact">Teléfono: <a href="tel:+529991410909" class="footer-link">+52 9991410909</a></p>
+    <p class="footer-address">Dirección: Mérida, Yucatán, México</p>
+  </div>
+</footer>
+
+  <script>
+    // Mostrar errores de URL
+    const params = new URLSearchParams(window.location.search);
+    const error = params.get('error');
+    if (error) {
+      document.getElementById('errorMsg').textContent = decodeURIComponent(error);
+    }
+
+    // Limpiar error al hacer clic en los campos
+    document.getElementById('email').addEventListener('focus', clearError);
+    document.getElementById('password').addEventListener('focus', clearError);
+    
+    function clearError() {
+      document.getElementById('errorMsg').textContent = '';
+    }
+  </script>
+</body>
+</html>
+

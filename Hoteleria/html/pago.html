@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Pagar Reserva</title>
+   <link rel="stylesheet" href="../../css/styles.css" />
+   <link rel="stylesheet" href="../../css/footer.css" />
+</head>
+<body>
+  <header>
+    <img src="../img/logoprueba.png" alt="Logo de LuminusCreaCode" width="100" />
+    <h2>Proceso de Pago</h2>
+  </header>
+
+  <main>
+    <section>
+      <p><strong>Hotel:</strong> Playa Coral</p>
+      <p><strong>Fechas:</strong> 18–20 agosto</p>
+      <p><strong>Total:</strong> $2,400 MXN</p>
+
+<form>
+  <label>Método de pago:</label>
+  <select id="metodoPago">
+    <option value="">Selecciona un método</option>
+    <option value="Tarjeta">Tarjeta</option>
+    <option value="Transferencia">Transferencia</option>
+    <option value="Oxxo Pay">Oxxo Pay</option>
+  </select><br><br>
+
+  <!-- Contenedor dinámico que será llenado desde el script -->
+  <div id="infoPago"></div>
+
+  <a href="gracias.html" id="btnPagar">Pagar ahora</a>
+</form>
+      </form>
+    </section>
+  </main>
+
+<footer class="site-footer">
+  <div class="footer-content">
+    <p class="footer-title"><strong>O también puedes escribirnos a:</strong></p>
+    <p class="footer-contact">Email: <a href="mailto:soporte@luminuscreacode.com" class="footer-link">soporte@luminuscreacode.com</a></p>
+    <p class="footer-contact">Teléfono: <a href="tel:+529991410909" class="footer-link">+52 9991410909</a></p>
+    <p class="footer-address">Dirección: Mérida, Yucatán, México</p>
+  </div>
+</footer>
+  </footer>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <script src="../js/metodopago.js"></script>
+</body>
+</html>

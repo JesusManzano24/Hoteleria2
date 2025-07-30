@@ -1,0 +1,81 @@
+   /* Modal básico */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+    }
+
+    .modal-contenido {
+      background: #fff;
+      padding: 30px;
+      border-radius: 8px;
+      width: 90%;
+      max-width: 400px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
+
+    .modal-contenido h3 {
+      margin-bottom: 20px;
+      color: #0f1c2f;
+    }
+
+    .modal-contenido input,
+    .modal-contenido select {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+
+    .modal-contenido button {
+      width: 100%;
+      padding: 10px;
+      background-color: #005f99;
+      color: white;
+      border: none;
+      border-radius: 6px;
+    }
+
+    .cerrar {
+      background-color: #6c757d !important;
+      margin-top: 10px;
+    }/* Centrado general del contenido */
+main {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Centrado del encabezado */
+header {
+  text-align: center;
+}
+
+/* Centrar lista de usuarios */
+section ul {
+  padding-left: 0;
+  list-style: none;
+  text-align: left;
+}
+h2 {
+  text-align: center;
+  color: #0f1c2f;
+}
+h3{
+    text-align: center;
+}
+#btnAgregarUsuario {
+    margin-left: 200px;
+  background-color: #005f99;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 10px 15px;
+  cursor: pointer;
+}

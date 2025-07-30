@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Administrar Usuarios</title>
+</head>
+<body>
+  <header>
+    <img src="../img/logoprueba.png" alt="Logo de LuminusCreaCode" width="100" />
+    <link rel="stylesheet" href="../css/crudusuarios.css">
+      <link rel="stylesheet" href="../../css/styles.css" />
+     <link rel="stylesheet" href="../../css/footer.css" />
+    <h1>Bienvenido a LuminusCrea Booking</h1>
+    <nav>
+      <a href="admin.html">Volver al panel</a>
+    </nav>
+  </header>
+
+  <main>
+    <h2>Gestión de Usuarios</h2>
+
+  <button id="btnAgregarUsuario" onclick="mostrarFormulario()">Agregar Usuario</button>
+
+<div id="formularioUsuario" style="display: none; margin-top: 20px;">
+  <form>
+    <label>Nombre:</label>
+    <input type="text" required />
+
+    <label>Correo:</label>
+    <input type="email" required />
+
+    <label>Rol:</label>
+    <select>
+      <option value="cliente">Cliente</option>
+      <option value="anfitrion">Anfitrión</option>
+      <option value="admin">Administrador</option>
+    </select>
+
+    <button>Crear usuario</button>
+  </form>
+</div>
+
+    <section>
+      <h3>Usuarios registrados</h3>
+      <ul>
+        <li>Juan Pérez (cliente) <button>Editar</button> <button>Eliminar</button></li>
+        <li>Luisa Gómez (anfitriona) <button>Editar</button> <button>Eliminar</button></li>
+      </ul>
+    </section>
+  </main>
+
+<footer class="site-footer">
+  <div class="footer-content">
+    <p class="footer-title"><strong>O también puedes escribirnos a:</strong></p>
+    <p class="footer-contact">Email: <a href="mailto:soporte@luminuscreacode.com" class="footer-link">soporte@luminuscreacode.com</a></p>
+    <p class="footer-contact">Teléfono: <a href="tel:+529991410909" class="footer-link">+52 9991410909</a></p>
+    <p class="footer-address">Dirección: Mérida, Yucatán, México</p>
+  </div>
+</footer>
+  <script src="../js/formuilariocrudusuarios.js"></script>
+</body>
+</html>

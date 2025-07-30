@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Contacto - LuminusCrea Booking</title>
+</head>
+<body>
+  <header>
+    <link rel="stylesheet" href="../../css/styles.css" />
+    <link rel="stylesheet" href="../../css/footer.css" />
+    <link rel="icon" href="../../img/logoprueba.png" type="image/x-icon" />
+    <img id="logo" src="../../img/logoprueba.png" alt="Logo de LuminusCreaCode" width="100"/>
+    <h1>Bienvenido a LuminusCrea Booking</h1>
+    <nav>
+      <a href="../index/index.html">Inicio</a>
+      <a href="../alojamientos/alojamientos.html">Explorar</a>
+      <a href="../contacto/contacto.html">Contacto</a>
+      <a href="../Registro/registro.html">Registrarse</a>
+      <a href="../Login/login.html">Iniciar Sesión</a>
+    </nav>
+  </header>
+
+  <main>
+    <h2>Contáctanos</h2>
+    <form id="contactForm">
+      <label>Nombre:</label>
+      <input type="text" id="nombre" name="nombre" required /><br>
+      
+      <label>Correo electrónico:</label>
+      <input type="email" id="correo" name="correo" required /><br>
+      
+      <label>Mensaje:</label>
+      <textarea id="mensaje" name="mensaje" rows="5" required></textarea><br>
+      
+      <button type="submit">Enviar mensaje</button>
+    </form>
+    
+    <!-- Mensaje de confirmación (oculto inicialmente) -->
+    <div id="confirmation" style="display: none; margin-top: 20px; padding: 15px; background: #e6f7ff; border: 1px solid #91d5ff; border-radius: 4px;">
+      <p>¡Gracias por tu mensaje! Se abrirá tu cliente de correo para completar el envío.</p>
+      <p>Por favor, confirma el envío en tu aplicación de correo electrónico.</p>
+    </div>
+  </main>
+  
+    <footer class="site-footer">
+  <div class="footer-content">
+    <p class="footer-title"><strong>O también puedes escribirnos a:</strong></p>
+    <p class="footer-contact">Email: <a href="mailto:soporte@luminuscreacode.com" class="footer-link">soporte@luminuscreacode.com</a></p>
+    <p class="footer-contact">Teléfono: <a href="tel:+529991410909" class="footer-link">+52 9991410909</a></p>
+    <p class="footer-address">Dirección: Mérida, Yucatán, México</p>
+  </div>
+</footer>
+
+  <script>
+    document.getElementById('contactForm').addEventListener('submit', function(event) {
+  event.preventDefault();
+
+  // Obtener valores del formulario
+  const nombre = document.getElementById('nombre').value;
+  const correo = document.getElementById('correo').value;
+  const mensaje = document.getElementById('mensaje').value;
+
+  // Construir cuerpo del correo
+  const cuerpoCorreo = `Nombre: ${nombre}%0D%0ACorreo: ${correo}%0D%0A%0D%0AMensaje:%0D%0A${mensaje}`;
+
+  // Direcciones de correo
+  const destinatarioPrincipal = '9991404825j@gmail.com';
+  const copia1 = 'krnrodea@gmail.com';
+  const copia2 = 'ran_di_001@hotmail.com';
+
+  // Crear enlace mailto con CC
+  const mailtoLink = `mailto:${destinatarioPrincipal}?cc=${copia1},${copia2}&subject=Contacto desde LuminusCrea Booking&body=${cuerpoCorreo}`;
+
+  // Limpiar campos del formulario 🧹
+  document.getElementById('contactForm').reset();
+
+  // Mostrar mensaje de confirmación
+  document.getElementById('confirmation').style.display = 'block';
+
+  // Abrir cliente de correo después de un pequeño retraso
+  setTimeout(function() {
+    window.location.href = mailtoLink;
+  }, 1000);
+});
+  </script>
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Administrar Hoteles</title>
+ <link rel="stylesheet" href="../../css/styles.css" />
+</head>
+<body>
+  <header>
+    <img src="../../img/logoprueba.png" alt="Logo de LuminusCreaCode" width="100" />
+    <h1>Bienvenido a LuminusCrea Booking</h1>
+    <nav>
+      <a href="host.html">Volver al panel</a>
+    </nav>
+  </header>
+
+  <main>
+    <h2>Gestión de Alojamientos</h2>
+
+   <form action="../php/registrar_alojamiento.php" method="POST">
+  <label>Nombre del alojamiento:</label>
+  <input type="text" name="nombre" required />
+
+  <label>Descripción:</label>
+  <textarea name="descripcion" rows="3" required></textarea>
+
+ <!-- Tipo de alojamiento -->
+<label>Tipo de alojamiento:</label>
+<select name="id_tipo_alojamiento" required>
+  <option value="">Selecciona tipo</option>
+  <option value="1">Casa</option>
+  <option value="2">Hotel</option>
+  <option value="3">Hostal</option>
+  <option value="4">Departamento</option>
+</select>
+
+<!-- Estado del alojamiento -->
+<label>Estado del alojamiento:</label>
+<select name="id_estado" required>
+  <option value="">Selecciona estado</option>
+  <option value="1">Disponible</option>
+  <option value="2">Ocupado</option>
+  <option value="3">En mantenimiento</option>
+</select>
+
+  <label>Dirección completa:</label>
+  <textarea name="direccion" rows="2" required></textarea>
+
+  <label>Capacidad (personas):</label>
+  <input type="number" name="capacidad" min="1" required />
+
+  <label>Precio por noche (MXN):</label>
+  <input type="number" name="precio" min="0" step="0.01" required />
+
+  <label>Latitud:</label>
+  <input type="text" name="latitud" required placeholder="Ej: 21.16191124" />
+
+  <label>Longitud:</label>
+  <input type="text" name="longitud" required placeholder="Ej: -89.61927418" />
+
+  <!-- Puedes ocultar el id_usuario si ya lo tienes guardado por sesión -->
+  <input type="hidden" name="id_usuario" value="ID_DEL_USUARIO_LOGUEADO" />
+
+  <button type="submit">Registrar alojamiento</button>
+</form>
+
+    <section>
+    <h3>Mis hoteles registrados</h3>
+    <ul id="lista-alojamientos">
+        <li>Cargando alojamientos...</li>
+    </ul>
+</section>
+  </main>
+
+  <footer style="margin-top: 40px; padding: 20px; background-color: #0f1c2f; color: #fff; text-align: center; border-radius: 8px;">
+    <p><strong>O también puedes escribirnos a:</strong></p>
+    <p>Email: <a href="mailto:soporte@luminuscreacode.com" style="color: #00b3ff;">soporte@luminuscreacode.com</a></p>
+    <p>Teléfono: <a href="tel:+529991410909" style="color: #00b3ff;">+52 9991410909</a></p>
+    <p>Dirección: Mérida, Yucatán, México</p>
+  </footer>
+  <script src="../js/recuperaralojamientos.js"></script>
+</body>
+</html>

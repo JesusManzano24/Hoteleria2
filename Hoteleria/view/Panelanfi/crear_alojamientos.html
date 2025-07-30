@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Administrar Hoteles</title>
+  <link rel="stylesheet" href="../../css/styles.css">
+  <link rel="stylesheet" href="../../css/footer.css">
+</head>
+<body>
+  <header>
+    <img src="../../img/logoprueba.png" alt="Logo de LuminusCreaCode" width="100">
+    <h1>Bienvenido a LuminusCrea Booking</h1>
+    <nav>
+      <a href="panelanfitrion.php">Volver al panel</a>
+    </nav>
+  </header>
+
+  <main>
+    <h2>Gestión de Alojamientos</h2>
+
+    <?php if (isset($_SESSION['exito'])): ?>
+      <div class="alert success"><?= $_SESSION['exito']; unset($_SESSION['exito']); ?></div>
+    <?php endif; ?>
+
+    <?php if (isset($_SESSION['error'])): ?>
+      <div class="alert error"><?= $_SESSION['error']; unset($_SESSION['error']); ?></div>
+    <?php endif; ?>
+
+    <form action="procesar_alojamiento.php" method="POST" enctype="multipart/form-data">
+      <!-- Campos del formulario -->
+      <label>Nombre del alojamiento:</label>
+      <input type="text" name="nombre" required>
+
+      <label>Descripción:</label>
+      <textarea name="descripcion" rows="3" required></textarea>
+
+      <label>Tipo de alojamiento:</label>
+      <select name="id_tipo_alojamiento" required>
+        <option value="">Selecciona tipo</option>
+        <option value="1">Casa</option>
+        <option value="2">Hotel</option>
+        <option value="3">Hostal</option>
+        <option value="4">Departamento</option>
+      </select>
+
+      <label>Estado del alojamiento:</label>
+      <select name="id_estado" required>
+        <option value="">Selecciona estado</option>
+        <option value="1">Disponible</option>
+        <option value="2">Ocupado</option>
+        <option value="3">En mantenimiento</option>
+      </select>
+
+      <label>Dirección completa:</label>
+      <textarea name="direccion" rows="2" required></textarea>
+
+      <label>Capacidad (personas):</label>
+      <input type="number" name="capacidad" min="1" required>
+
+      <label>Precio por noche (MXN):</label>
+      <input type="number" name="precio" min="0" step="0.01" required>
+
+      <label>Latitud:</label>
+      <input type="text" name="latitud" required placeholder="Ej: 21.16191124">
+
+      <label>Longitud:</label>
+      <input type="text" name="longitud" required placeholder="Ej: -89.61927418">
+
+      <!-- Campo para múltiples imágenes -->
+      <label>Imágenes del alojamiento:</label>
+      <input type="file" name="imagenes[]" multiple accept="image/*">
+
+      <input type="hidden" name="id_usuario" value="<?= $_SESSION['id_usuario'] ?? '' ?>">
+
+      <button type="submit">Registrar alojamiento</button>
+    </form>
+  </main>
+
+  <footer class="site-footer">
+    <!-- Tu footer aquí -->
+  </footer>
+</body>
+</html>

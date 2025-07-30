@@ -1,0 +1,163 @@
+/* Reset básico */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Tipografía general */
+body {
+  font-family: 'Segoe UI', sans-serif;
+  line-height: 1.6;
+  background-color: #f5f7fa;
+  color: #333;
+  padding: 20px;
+}
+
+/* Encabezado */
+header {
+  background-color: #0f1c2f;
+  color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+}
+
+/* Logo redondo alineado a la izquierda */
+header img {
+  float: left;
+  margin-right: 15px;
+  width: 80px;
+  height: 80px;
+   border: 4px solid #fff; /* línea blanca alrededor */
+  object-fit: cover;
+  border-radius: 50%;
+  background-color: #fff;
+}
+
+header h1,
+header h2 {
+  margin-bottom: 10px;
+}
+
+/* Navegación */
+nav {
+  margin-top: 10px;
+}
+
+nav a {
+  margin: 0 10px;
+  color: #00b3ff;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+nav a:hover {
+  text-decoration: underline;
+}
+
+/* Secciones principales */
+main {
+  margin-top: 30px;
+}
+
+section {
+  margin-bottom: 30px;
+}
+
+/* Buscador */
+.buscador input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+/* Listado de hoteles */
+.listado {
+  display: grid;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.hotel,
+article {
+  background-color: #fff;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.hotel h3 {
+  color: #005f99;
+  margin-bottom: 8px;
+}
+
+.hotel p {
+  margin-bottom: 10px;
+  font-weight: 500;
+}
+
+.hotel a {
+  display: inline-block;
+  padding: 8px 12px;
+  background-color: #00b3ff;
+  color: #fff;
+  border-radius: 5px;
+  text-decoration: none;
+}
+
+.hotel a:hover {
+  background-color: #0074a8;
+}
+
+/* Formularios */
+form {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #eef1f5;
+  border-radius: 8px;
+}
+
+form label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+form input,
+form select {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+form button {
+  padding: 10px 15px;
+  background-color: #005f99;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+form button:hover {
+  background-color: #003d66;
+}
+
+/* Botones sueltos */
+button {
+  margin: 10px 5px;
+  padding: 10px 15px;
+  background-color: #6c757d;
+  color: white;
+  border: none;
+  border-radius: 5px;
+}
+
+button:hover {
+  background-color: #495057;
+}
