@@ -1,200 +1,225 @@
-// registro.js - VERSIÓN CON RUTAS CORREGIDAS Y MEJORAS
 document.addEventListener('DOMContentLoaded', function() {
   // ——————————————————————————————————————————————
-  // 1) Variables y selects del DOM
+  // 1) Configuración inicial y elementos del DOM
+  const BASE_PATH = '../../'; // Ruta base para todos los recursos
   let clickCount = 0;
-  const logo = document.getElementById('logo');
-  const registroFormContainer = document.getElementById('registroFormContainer');
-  const adminLoginFormContainer = document.getElementById('adminLoginFormContainer');
-  const registroForm = document.getElementById('registroForm');
-  const adminLoginForm = document.getElementById('adminLoginForm');
-  const regisAdminBtn = document.getElementById('RegisAdmin');
-  const adminOption = document.getElementById('adminOption');
-  const tipoUsuarioSelect = document.getElementById('tipo_usuario');
+  
+  // Elementos del DOM
+  const elements = {
+    logo: document.getElementById('logo'),
+    registroFormContainer: document.getElementById('registroFormContainer'),
+    adminLoginFormContainer: document.getElementById('adminLoginFormContainer'),
+    registroForm: document.getElementById('registroForm'),
+    adminLoginForm: document.getElementById('adminLoginForm'),
+    regisAdminBtn: document.getElementById('RegisAdmin'),
+    adminOption: document.getElementById('adminOption'),
+    tipoUsuarioSelect: document.getElementById('tipo_usuario')
+  };
 
-  // Elemento para mostrar mensajes de debug
+  // ——————————————————————————————————————————————
+  // 2) Configuración de debug
   const debugInfo = document.createElement('div');
   debugInfo.className = 'debug-info';
   debugInfo.innerHTML = 'Debug Console:<br>';
   document.body.appendChild(debugInfo);
 
-  // Función para mostrar mensajes de debug
   function logDebug(message) {
     debugInfo.innerHTML += `${message}<br>`;
     console.log(message);
   }
 
-  // Mostrar elementos cargados en debug
+  // Verificación inicial de elementos
   logDebug('Elementos cargados:');
-  logDebug(`- Logo: ${logo ? 'OK' : 'No encontrado'}`);
-  logDebug(`- Botón RegisAdmin: ${regisAdminBtn ? 'OK' : 'No encontrado'}`);
-  logDebug(`- Opción Admin: ${adminOption ? 'OK' : 'No encontrado'}`);
-  logDebug(`- Select tipo usuario: ${tipoUsuarioSelect ? 'OK' : 'No encontrado'}`);
+  Object.entries(elements).forEach(([name, element]) => {
+    logDebug(`- ${name}: ${element ? 'OK' : 'No encontrado'}`);
+  });
 
   // ——————————————————————————————————————————————
-  // 2) Mostrar el formulario de admin al hacer 3 clics en el logo
-  if (logo) {
-    logo.addEventListener('click', () => {
+  // 3) Mostrar formulario de admin con 3 clics en el logo
+  if (elements.logo) {
+    elements.logo.addEventListener('click', () => {
       clickCount++;
       logDebug(`Clics en logo: ${clickCount}/3`);
       
       if (clickCount === 3) {
         logDebug('Mostrando formulario de admin');
-        if (registroFormContainer) registroFormContainer.style.display = 'none';
-        if (adminLoginFormContainer) adminLoginFormContainer.style.display = 'block';
+        if (elements.registroFormContainer) elements.registroFormContainer.style.display = 'none';
+        if (elements.adminLoginFormContainer) elements.adminLoginFormContainer.style.display = 'block';
         clickCount = 0;
       }
     });
   }
 
   // ——————————————————————————————————————————————
-  // 3) Lógica MEJORADA para el botón "Registrar Administrador"
+  // 4) Lógica para el botón "Registrar Administrador"
   function handleAdminRegister(event) {
-    // Prevenir cualquier comportamiento por defecto
-    if (event) {
-      event.preventDefault();
-      event.stopPropagation();
-    }
+    event?.preventDefault();
+    event?.stopPropagation();
     
     logDebug('Botón Registrar Admin clickeado');
     
-    // Verificar elementos necesarios
-    if (!adminOption || !tipoUsuarioSelect || !adminLoginFormContainer || !registroFormContainer) {
+    if (!elements.adminOption || !elements.tipoUsuarioSelect || 
+        !elements.adminLoginFormContainer || !elements.registroFormContainer) {
       logDebug('ERROR: Faltan elementos requeridos');
       return;
     }
 
-    // 1. Mostrar y seleccionar opción Admin
-    adminOption.style.display = 'block';
-    tipoUsuarioSelect.value = 'Admin';
-
-    // 2. Cambiar visibilidad de formularios
-    adminLoginFormContainer.style.display = 'none';
-    registroFormContainer.style.display = 'block';
+    elements.adminOption.style.display = 'block';
+    elements.tipoUsuarioSelect.value = 'Admin';
+    elements.adminLoginFormContainer.style.display = 'none';
+    elements.registroFormContainer.style.display = 'block';
     
-    // 3. Scroll suave al formulario de registro
     setTimeout(() => {
-      registroFormContainer.scrollIntoView({ behavior: 'smooth' });
+      elements.registroFormContainer.scrollIntoView({ behavior: 'smooth' });
     }, 100);
 
-    // Verificación final
     logDebug('Opción Admin visible');
-    logDebug('Valor seleccionado: ' + tipoUsuarioSelect.value);
+    logDebug(`Valor seleccionado: ${elements.tipoUsuarioSelect.value}`);
   }
 
-  // Configuración del event listener para el botón
-  if (regisAdminBtn) {
+  if (elements.regisAdminBtn) {
     logDebug('Configurando event listener para RegisAdmin');
-    regisAdminBtn.addEventListener('click', handleAdminRegister);
+    elements.regisAdminBtn.addEventListener('click', handleAdminRegister);
   } else {
-    logDebug('ERROR: Elemento RegisAdmin no encontrado en el DOM');
+    logDebug('ERROR: Elemento RegisAdmin no encontrado');
   }
 
   // ——————————————————————————————————————————————
-  // 4) Envío del formulario de registro
-  if (registroForm) {
-    // Asegurarnos que el formulario tenga el enctype correcto
-    //registroForm.setAttribute('enctype', 'multipart/form-data'); descomentar solo si se usara foto_perfil
-    
-    registroForm.addEventListener('submit', function(event) {
+  // 5) Envío del formulario de registro
+  if (elements.registroForm) {
+    elements.registroForm.addEventListener('submit', function(event) {
       event.preventDefault();
 
-      // Fecha de registro al día
-      document.getElementById('fecha_registro').value =
-        new Date().toISOString().split('T')[0];
+      // Establecer fecha actual
+      document.getElementById('fecha_registro').value = new Date().toISOString().split('T')[0];
 
       const formData = new FormData(this);
 
-      // RUTA CORREGIDA: Usar el endpoint de registro específico
-      fetch('../../controller/RegistroController.php', {
+      fetch(`${BASE_PATH}controller/RegistroController.php`, {
         method: 'POST',
         body: formData
       })
-      .then(res => {
+      .then(async res => {
+        const text = await res.text();
+        logDebug('>>> RESPUESTA RAW registro: ' + text);
+        
         if (!res.ok) {
-          return res.text().then(txt => {
-            throw new Error(`HTTP ${res.status}\n${txt}`);
-          });
+          throw new Error(`HTTP ${res.status}: ${text}`);
         }
-        return res.text();
-      })
-      .then(txt => {
-        logDebug('>>> RESPUESTA RAW registro: ' + txt);
-        let data;
+        
         try {
-          data = JSON.parse(txt);
+          return JSON.parse(text);
         } catch (e) {
-          throw new Error('No es JSON válido: ' + e.message);
+          throw new Error(`Respuesta no es JSON válido: ${text.substring(0, 100)}...`);
         }
+      })
+      .then(data => {
+        if (!data) throw new Error('No se recibieron datos');
+        
         if (data.success) {
           alert('Registro exitoso!');
-          // RUTA ABSOLUTA para mejor compatibilidad
-          window.location.href = '/Hoteleria/view/Login/login.html';
+          window.location.href = '../view/Login/login.html';
         } else {
-          alert('Error en el registro: ' + data.error);
+          alert(`Error en el registro: ${data.error}`);
         }
       })
       .catch(err => {
-        console.error('Error registro:', err);
-        alert('Hubo un error al registrar. Revisa la consola.');
+        console.error('Error completo en registro:', err);
+        alert('Error al registrar. Ver detalles en consola.');
       });
     });
   }
 
   // ——————————————————————————————————————————————
-  // 5) Envío del formulario de login de administrador
-  if (adminLoginForm) {
-    adminLoginForm.addEventListener('submit', function(event) {
+// 6) Envío del formulario de login de administrador (MEJORADO)
+  if (elements.adminLoginForm) {
+    elements.adminLoginForm.addEventListener('submit', function(event) {
       event.preventDefault();
 
       const correo = document.getElementById('adminCorreo').value.trim();
       const password = document.getElementById('adminPassword').value;
 
       if (!correo || !password) {
-        alert('Debes ingresar correo y contraseña de administrador.');
+        showAlert('error', 'Debes ingresar correo y contraseña');
         return;
       }
 
-      // CORRECCIÓN IMPORTANTE: Usar el controlador de LOGIN, no de registro
-     fetch('../../controller/LoginController.php?action=admin', {
+      // Mostrar carga
+      const submitBtn = this.querySelector('button[type="submit"]');
+      const originalBtnText = submitBtn.innerHTML;
+      submitBtn.innerHTML = '<i class="fa fa-spinner fa-spin"></i> Verificando...';
+      submitBtn.disabled = true;
+
+      fetch(`${BASE_PATH}controller/LoginController.php?action=admin`, {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
         },
-        body: JSON.stringify({
-          correo,
-          password
-        })
+        body: JSON.stringify({ correo, password })
       })
-      .then(res => {
+      .then(async res => {
+        const text = await res.text();
+        logDebug('>>> RAW login_admin: ' + text);
+        
         if (!res.ok) {
-          return res.text().then(txt => {
-            throw new Error(`HTTP ${res.status}\n${txt}`);
-          });
+          throw new Error(`HTTP ${res.status}: ${text}`);
         }
-        return res.text();
-      })
-      .then(txt => {
-        logDebug('>>> RAW login_admin: ' + txt);
-
-        let data;
+        
         try {
-          data = JSON.parse(txt);
+          return JSON.parse(text);
         } catch (e) {
-          throw new Error('Respuesta no es JSON válido: ' + e.message);
+          throw new Error(`Respuesta no es JSON válido: ${text.substring(0, 100)}...`);
         }
-
-        if (data.success) {
-          // RUTA CORREGIDA: Redirigir al panel de admin
-          window.location.href = '../view/admin/dashboard.html';
+      })
+      .then(data => {
+        if (!data) throw new Error('No se recibieron datos del servidor');
+        
+        if (data.success && data.redirect) {
+          showAlert('success', 'Acceso concedido. Redirigiendo...');
+          setTimeout(() => {
+            window.location.href = data.redirect;
+          }, 1500);
         } else {
-          alert(data.error || 'Credenciales incorrectas');
+          // Mensajes específicos según el tipo de error
+          const errorMessage = data.error.includes('Acceso solo para administradores') 
+            ? 'Solo usuarios administradores pueden acceder a esta sección'
+            : data.error.includes('Credenciales incorrectas') 
+              ? 'Usuario o contraseña incorrectos'
+              : 'Error al iniciar sesión. Por favor intenta nuevamente';
+          
+          showAlert('error', errorMessage);
         }
       })
       .catch(err => {
-        console.error('Error login_admin:', err);
-        alert('Hubo un error al iniciar sesión. Revisa la consola.');
+        console.error('Error completo en login:', err);
+        showAlert('error', 'Error al contactar al servidor. Intenta más tarde');
+      })
+      .finally(() => {
+        submitBtn.innerHTML = originalBtnText;
+        submitBtn.disabled = false;
       });
     });
+  }
+
+  // Función para mostrar alertas bonitas
+  function showAlert(type, message) {
+    // Eliminar alertas previas
+    const existingAlerts = document.querySelectorAll('.custom-alert');
+    existingAlerts.forEach(alert => alert.remove());
+
+    const alertDiv = document.createElement('div');
+    alertDiv.className = `custom-alert ${type}`;
+    alertDiv.innerHTML = `
+      <span>${message}</span>
+      <button onclick="this.parentElement.remove()">&times;</button>
+    `;
+    
+    document.body.appendChild(alertDiv);
+    
+    // Auto-eliminar después de 5 segundos
+    setTimeout(() => {
+      alertDiv.remove();
+    }, 5000);
   }
 });
