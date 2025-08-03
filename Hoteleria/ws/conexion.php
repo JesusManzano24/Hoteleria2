@@ -1,12 +1,16 @@
-
 <?php
 function conectar(): PDO {
     try {
-        $conexion = new PDO('mysql:host=localhost;port=3306;dbname=hoteleria', 'root', '');
+        $conexion = new PDO(
+            'mysql:host=localhost;port=3306;dbname=hoteleria;charset=utf8', 
+            'root', 
+            ''
+        );
         $conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $conexion->exec("SET NAMES utf8");
+        $conexion->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
         return $conexion;
     } catch (PDOException $e) {
-        die('Error de conexión: ' . $e->getMessage());
+        // Lanzar excepción en lugar de morir
+        throw new Exception('Error de conexión: ' . $e->getMessage());
     }
 }

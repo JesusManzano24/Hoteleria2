@@ -142,59 +142,59 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   // ——————————————————————————————————————————————
-  // 5) Envío del formulario de login de administrador
-  if (adminLoginForm) {
-    adminLoginForm.addEventListener('submit', function(event) {
-      event.preventDefault();
+// ——————————————————————————————————————————————
+// 5) Envío del formulario de login de administrador
+if (adminLoginForm) {
+  adminLoginForm.addEventListener('submit', async function(event) {
+    event.preventDefault();
 
-      const correo = document.getElementById('adminCorreo').value.trim();
-      const password = document.getElementById('adminPassword').value;
+    const correo = document.getElementById('adminCorreo').value.trim();
+    const password = document.getElementById('adminPassword').value;
 
-      if (!correo || !password) {
-        alert('Debes ingresar correo y contraseña de administrador.');
-        return;
+    if (!correo || !password) {
+      alert('Debes ingresar correo y contraseña de administrador.');
+      return;
+    }
+
+    const submitBtn = this.querySelector('button[type="submit"]');
+    const originalText = submitBtn.innerHTML;
+    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Verificando...';
+    submitBtn.disabled = true;
+
+    try {
+      const response = await fetch('/Hoteleria/controller/LoginAdminController.php', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({correo, password})
+      });
+
+      // Manejar respuesta no JSON
+      if (!response.ok) {
+        const text = await response.text();
+        throw new Error(`HTTP ${response.status}: ${text}`);
       }
 
-      // CORRECCIÓN IMPORTANTE: Usar el controlador de LOGIN, no de registro
-     fetch('../../controller/LoginController.php?action=admin', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          correo,
-          password
-        })
-      })
-      .then(res => {
-        if (!res.ok) {
-          return res.text().then(txt => {
-            throw new Error(`HTTP ${res.status}\n${txt}`);
-          });
-        }
-        return res.text();
-      })
-      .then(txt => {
-        logDebug('>>> RAW login_admin: ' + txt);
-
-        let data;
-        try {
-          data = JSON.parse(txt);
-        } catch (e) {
-          throw new Error('Respuesta no es JSON válido: ' + e.message);
-        }
-
-        if (data.success) {
-          // RUTA CORREGIDA: Redirigir al panel de admin
-          window.location.href = '../view/admin/dashboard.html';
-        } else {
-          alert(data.error || 'Credenciales incorrectas');
-        }
-      })
-      .catch(err => {
-        console.error('Error login_admin:', err);
-        alert('Hubo un error al iniciar sesión. Revisa la consola.');
-      });
-    });
-  }
+      const data = await response.json();
+      
+      if (data.success) {
+        window.location.href = data.redirect || '../../view/dashboard/dashboard.html';
+      } else {
+        throw new Error(data.error || 'Credenciales incorrectas');
+      }
+      
+    } catch (error) {
+      console.error('Error en login:', error);
+      
+      // Mensaje más específico para el error de headers
+      if (error.message.includes('headers ya enviados')) {
+        alert('Error crítico: Problema de configuración en el servidor. Contacta al administrador.');
+      } else {
+        alert(`Error: ${error.message}`);
+      }
+    } finally {
+      submitBtn.innerHTML = originalText;
+      submitBtn.disabled = false;
+    }
+  });
+}
 });
