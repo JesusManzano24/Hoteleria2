@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Registro</title>
+  <!-- En el <head> de tu HTML -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="stylesheet" href="../../css/styles.css" />
+   <link rel="stylesheet" href="../../css/footer.css" />
+</head>
+<body>
+  <header>
+    <img id="logo" src="../../img/logoprueba.png" alt="Logo de LuminusCreaCode" width="100"/>
+    <h1>Bienvenido a LuminusCrea Booking</h1>
+    <nav>
+      <a href="../index/index.html">Inicio</a>
+      <a href="../alojamientos/alojamientos.html">Explorar</a>
+      <a href="../contacto/contacto.html">Contacto</a>
+      <a href="../Registro/registro.html">Registrarse</a>
+      <a href="../Login/login.html">Iniciar Sesión</a>
+    </nav>
+  </header>
+
+  <main>
+    <div id="registroFormContainer">
+      <h2>Crear una cuenta</h2>
+      <form id="registroForm" enctype="multipart/form-data">
+        <label for="tipo_usuario">Tipo de usuario:</label>
+       <select name="tipo" id="tipo_usuario">
+  <option value="">Selecciona el Tipo de usuario</option>
+ <option id="adminOption" value="Admin" style="display: none;">Administrador</option>
+  <option value="anfitrion">Anfitrión</option>
+  <option value="Huesped">Huesped</option>
+</select>
+        <br /><br />
+
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" name="nombre" required /><br />
+
+        <label for="correo">Correo:</label>
+        <input type="email" id="correo" name="correo" required /><br />
+
+        <label for="password">Contraseña:</label>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          required
+        /><br />
+
+        <label for="telefono">Teléfono:</label>
+        <input type="tel" id="telefono" name="telefono" required /><br />
+
+        <label for="genero">Género:</label>
+        <select name="genero" id="genero">
+          <option value="masculino">Masculino</option>
+          <option value="femenino">Femenino</option>
+          <option value="otro">Otro</option>
+        </select>
+        <br /><br />
+
+        <label for="origen">Origen:</label>
+        <input type="text" id="origen" name="origen" required /><br />
+
+        <label for="fecha_nac">Fecha de nacimiento:</label>
+        <input type="date" id="fecha_nac" name="fecha_nac" required /><br />
+
+        <!-- Campo oculto para la fecha de registro -->
+        <input
+          type="hidden"
+          name="fecha_registro"
+          id="fecha_registro"
+        />
+
+        <button type="submit">Registrarse</button>
+      </form>
+    </div>
+
+    <!-- Formulario de login del administrador -->
+    <div id="adminLoginFormContainer" style="display: none;">
+      <h2>Iniciar sesión como Administrador</h2>
+      <form id="adminLoginForm">
+        <label for="adminCorreo">Correo:</label>
+        <input
+          type="email"
+          id="adminCorreo"
+          name="correo"
+          required
+        /><br /><br />
+
+        <label for="adminPassword">Contraseña:</label>
+        <input
+          type="password"
+          id="adminPassword"
+          name="password"
+          required
+        /><br /><br />
+
+        <button type="submit">Iniciar sesión</button> <button type="button" id="RegisAdmin">Registrar Administrador</button>
+      </form>
+    </div>
+  </main>
+  <footer class="site-footer">
+  <div class="footer-content">
+    <p class="footer-title"><strong>O también puedes escribirnos a:</strong></p>
+    <p class="footer-contact">Email: <a href="mailto:soporte@luminuscreacode.com" class="footer-link">soporte@luminuscreacode.com</a></p>
+    <p class="footer-contact">Teléfono: <a href="tel:+529991410909" class="footer-link">+52 9991410909</a></p>
+    <p class="footer-address">Dirección: Mérida, Yucatán, México</p>
+  </div>
+</footer>
+
+<!-- Al final del body -->
+<script src="../../js/registro.js"></script>
+  <!-- Ruta corregida: sube un nivel y busca login_admin.js en la carpeta js -->
+</body>
+</html>

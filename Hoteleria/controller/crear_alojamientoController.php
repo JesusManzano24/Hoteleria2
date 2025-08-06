@@ -1,73 +1,46 @@
 <?php
-require_once('../models/CrearAlojamientoModel.php');
+$root = $_SERVER['DOCUMENT_ROOT'];
+$modelPath = $root . '/Hoteleria/models/crear_alojamiento.php';
+
+if (!file_exists($modelPath)) {
+    die("Error: El archivo del modelo no se encontró en: " . $modelPath);
+}
+
+require_once $modelPath;
 
 class CrearAlojamientoController {
     private $model;
-    private $uploadPath = '../assets/uploads/';
-    private $allowedExtensions = ['jpg', 'jpeg', 'png', 'gif'];
-    private $maxFileSize = 5 * 1024 * 1024; // 5MB
-
+    private $uploadPath;
+    
     public function __construct() {
+        $root = $_SERVER['DOCUMENT_ROOT'];
+        $this->uploadPath = $root . '/Hoteleria/assets/uploads/';
         $this->model = new CrearAlojamientoModel();
-        $this->initializeUploadDirectory();
-    }
-
-    private function initializeUploadDirectory() {
-        if (!file_exists($this->uploadPath)) {
-            mkdir($this->uploadPath, 0777, true);
-            // Archivo .htaccess para seguridad
-            file_put_contents($this->uploadPath . '.htaccess', "Deny from all");
-        }
-    }
-
-    public function mostrarFormulario() {
-        $this->startSession();
-        
-        // Obtener datos necesarios para la vista si es necesario
-        $data = [
-            'tiposAlojamiento' => $this->model->obtenerTiposAlojamiento(),
-            'estadosAlojamiento' => $this->model->obtenerEstadosAlojamiento()
-        ];
-        
-        include('../views/panelanfi/crear_alojamiento.php');
+        session_start();
     }
 
     public function procesarFormulario() {
-        $this->startSession();
-        
-        if (!$this->validarCamposRequeridos()) {
-            header("Location: crear_alojamiento.php");
+        if (!$this->validarCampos()) {
+            $_SESSION['error'] = "Por favor complete todos los campos requeridos";
+            header("Location: crear_alojamiento.html");
             exit;
         }
 
-        $datosAlojamiento = $this->prepararDatosAlojamiento();
+        $datos = $this->prepararDatos();
 
         try {
-            $idAlojamiento = $this->model->crearAlojamiento($datosAlojamiento);
-            
-            if (!$idAlojamiento) {
-                throw new Exception("Error al registrar el alojamiento");
-            }
-
+            $idAlojamiento = $this->model->crearAlojamiento($datos);
             $this->procesarImagenes($idAlojamiento);
-            
-            $_SESSION['exito'] = "Alojamiento registrado correctamente con ID: $idAlojamiento";
+            $_SESSION['exito'] = "Alojamiento creado exitosamente!";
         } catch (Exception $e) {
             $_SESSION['error'] = $e->getMessage();
-            error_log('Error en CrearAlojamientoController: ' . $e->getMessage());
         }
 
-        header("Location: crear_alojamiento.php");
+        header("Location: crear_alojamiento.html");
         exit;
     }
 
-    private function startSession() {
-        if (session_status() === PHP_SESSION_NONE) {
-            session_start();
-        }
-    }
-
-    private function validarCamposRequeridos() {
+    private function validarCampos() {
         $camposRequeridos = [
             'nombre', 'descripcion', 'id_tipo_alojamiento', 
             'id_estado', 'direccion', 'capacidad', 
@@ -76,25 +49,24 @@ class CrearAlojamientoController {
 
         foreach ($camposRequeridos as $campo) {
             if (empty($_POST[$campo])) {
-                $_SESSION['error'] = "El campo $campo es requerido";
                 return false;
             }
         }
         return true;
     }
 
-    private function prepararDatosAlojamiento() {
+    private function prepararDatos() {
         return [
-            'id_usuario' => $_SESSION['id_usuario'] ?? 1,
-            'nombre' => trim($_POST['nombre']),
-            'descripcion' => trim($_POST['descripcion']),
-            'id_tipo_alojamiento' => intval($_POST['id_tipo_alojamiento']),
-            'id_estado' => intval($_POST['id_estado']),
-            'direccion' => trim($_POST['direccion']),
-            'capacidad' => intval($_POST['capacidad']),
-            'precio' => floatval($_POST['precio']),
-            'latitud' => floatval($_POST['latitud']),
-            'longitud' => floatval($_POST['longitud'])
+            'id_usuario' => $_SESSION['id_usuario'] ?? 1, 
+            'nombre' => htmlspecialchars(trim($_POST['nombre'])),
+            'descripcion' => htmlspecialchars(trim($_POST['descripcion'])),
+            'id_tipo_alojamiento' => (int)$_POST['id_tipo_alojamiento'],
+            'id_estado' => (int)$_POST['id_estado'],
+            'direccion' => htmlspecialchars(trim($_POST['direccion'])),
+            'capacidad' => (int)$_POST['capacidad'],
+            'precio' => (float)$_POST['precio'],
+            'latitud' => (float)$_POST['latitud'],
+            'longitud' => (float)$_POST['longitud']
         ];
     }
 
@@ -131,29 +103,21 @@ class CrearAlojamientoController {
     }
 
     private function validarArchivo($key) {
+        $extensionesPermitidas = ['jpg', 'jpeg', 'png', 'gif'];
+        $tamañoMaximo = 5 * 1024 * 1024; // 5MB
+
         // Validar tamaño
-        if ($_FILES['imagenes']['size'][$key] > $this->maxFileSize) {
+        if ($_FILES['imagenes']['size'][$key] > $tamañoMaximo) {
             return false;
         }
 
         // Validar extensión
         $extension = strtolower(pathinfo($_FILES['imagenes']['name'][$key], PATHINFO_EXTENSION));
-        if (!in_array($extension, $this->allowedExtensions)) {
+        if (!in_array($extension, $extensionesPermitidas)) {
             return false;
         }
 
-        // Validar tipo MIME
-        $finfo = finfo_open(FILEINFO_MIME_TYPE);
-        $mime = finfo_file($finfo, $_FILES['imagenes']['tmp_name'][$key]);
-        finfo_close($finfo);
-        
-        $allowedMimeTypes = [
-            'image/jpeg',
-            'image/png',
-            'image/gif'
-        ];
-
-        return in_array($mime, $allowedMimeTypes);
+        return true;
     }
 
     private function generarNombreArchivo($key) {

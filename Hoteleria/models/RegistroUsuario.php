@@ -1,6 +1,6 @@
 <?php
 // models/RegistroUsuario.php
-require_once __DIR__ . '/../ws/conexion.php';
+require_once __DIR__ . '/../ws/wshoteleria.php';
 
 class RegistroUsuario
 {

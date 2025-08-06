@@ -41,7 +41,7 @@ class LoginController
                 header('Location: /Hoteleria/view/dashboard/dashboard.html');
                 break;
             case 2:
-                header('Location: /Hoteleria/view/crudalojamientos/crud_alojamientos.html');
+                header('Location: /Hoteleria/view/Panelanfi/crear_alojamientos.html');
                 break;
             case 3:
                 header('Location: /Hoteleria/view/alojamientos/alojamientos.html');
