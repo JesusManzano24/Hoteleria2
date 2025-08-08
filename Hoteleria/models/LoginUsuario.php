@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/../ws/wshoteleria.php';
+require_once __DIR__ . '/../ws/conexion.php';
 
 class LoginUsuario
 {

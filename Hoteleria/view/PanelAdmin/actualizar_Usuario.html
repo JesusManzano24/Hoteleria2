@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Actualizar Usuario</title>
+  <link rel="icon" type="image/x-icon" href="../../img/logoprueba.png" />
+  <link rel="stylesheet" href="../../css/styles.css" />
+  <link rel="stylesheet" href="../../css/footer.css" />
+  <style>
+    .error { color: red; background: #ffeeee; padding: 10px; margin: 10px 0; }
+    .success { color: green; background: #eeffee; padding: 10px; margin: 10px 0; }
+    .optional-field { color: #666; font-style: italic; }
+  </style>
+</head>
+<body>
+  <header>
+    <img id="logo" src="../../img/logoprueba.png" alt="Logo de LuminusCreaCode" width="100"/>
+    <h1>Bienvenido a LuminusCrea Booking</h1>
+    <nav>
+      <a href="crear_Usuario.html">Crear Usuario</a>
+      <a href="eliminar_Usuario.html">Eliminar Usuario</a>
+      <a href="buscar_Usuario.html">Buscar Usuario</a>
+    </nav>
+  </header>
+
+  <main>
+    <div id="actualizarFormContainer">
+      <h2>Actualizar Usuario</h2>
+      <div id="mensaje"></div>
+      
+      <form id="formActualizarUsuario" enctype="multipart/form-data">
+        <!-- Campo obligatorio para el ID -->
+        <label for="id_usuario">ID del Usuario a actualizar*:</label>
+        <input type="number" id="id_usuario" name="id_usuario" required min="1" /><br /><br />
+        
+        <!-- Campos opcionales para actualización -->
+        <label for="tipo_usuario" class="optional-field">Tipo de usuario (opcional):</label>
+        <select name="tipo" id="tipo_usuario">
+          <option value="">Selecciona el Tipo de usuario</option>
+          <option value="Admin">Administrador</option>
+          <option value="anfitrion">Anfitrión</option>
+          <option value="Huesped">Huésped</option>
+        </select>
+        <br /><br />
+
+        <label for="nombre" class="optional-field">Nombre (opcional):</label>
+        <input type="text" id="nombre" name="nombre" /><br />
+
+        <label for="correo" class="optional-field">Correo (opcional):</label>
+        <input type="email" id="correo" name="correo" /><br />
+
+        <label for="password" class="optional-field">Nueva Contraseña (opcional):</label>
+        <input type="password" id="password" name="password" /><br />
+
+        <label for="telefono" class="optional-field">Teléfono (opcional):</label>
+        <input type="tel" id="telefono" name="telefono" /><br />
+
+        <label for="genero" class="optional-field">Género (opcional):</label>
+        <select name="genero" id="genero">
+          <option value="">Seleccione...</option>
+          <option value="masculino">Masculino</option>
+          <option value="femenino">Femenino</option>
+          <option value="otro">Otro</option>
+        </select>
+        <br /><br />
+
+        <label for="origen" class="optional-field">Origen (opcional):</label>
+        <input type="text" id="origen" name="origen" /><br />
+
+        <label for="fecha_nac" class="optional-field">Fecha de nacimiento (opcional):</label>
+        <input type="date" id="fecha_nac" name="fecha_nac" /><br />
+
+        <p class="optional-field">* Campos obligatorios</p>
+        <button type="submit">Actualizar Usuario</button>
+      </form>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-content">
+      <p class="footer-title"><strong>O también puedes escribirnos a:</strong></p>
+      <p class="footer-contact">Email: <a href="mailto:soporte@luminuscreacode.com" class="footer-link">soporte@luminuscreacode.com</a></p>
+      <p class="footer-contact">Teléfono: <a href="tel:+529991410909" class="footer-link">+52 9991410909</a></p>
+      <p class="footer-address">Dirección: Mérida, Yucatán, México</p>
+    </div>
+  </footer>
+
+  <script src="../../js/actualizarusuario.js"></script>
+</body>
+</html>

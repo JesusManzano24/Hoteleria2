@@ -2,9 +2,9 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <title>Registro</title>
+  <title>Crear Usuario</title>
   <!-- En el <head> de tu HTML -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="icon" type="image/x-icon" href="../../img/logoprueba.png" />
   <link rel="stylesheet" href="../../css/styles.css" />
    <link rel="stylesheet" href="../../css/footer.css" />
 </head>
@@ -13,25 +13,23 @@
     <img id="logo" src="../../img/logoprueba.png" alt="Logo de LuminusCreaCode" width="100"/>
     <h1>Bienvenido a LuminusCrea Booking</h1>
     <nav>
-      <a href="../index/index.html">Inicio</a>
-      <a href="../alojamientos/alojamientos.html">Explorar</a>
-      <a href="../contacto/contacto.html">Contacto</a>
-      <a href="../Registro/registro.html">Registrarse</a>
-      <a href="../Login/login.html">Iniciar Sesión</a>
+      <a href="eliminar_Usuario.html">Eliminar Usuario</a>
+      <a href="actualizar_Usuario.html">Actualizar Usuario</a>
+      <a href="buscar_Usuario.html">Buscar Usuario</a>
     </nav>
   </header>
 
   <main>
     <div id="registroFormContainer">
       <h2>Crear una cuenta</h2>
-      <form id="registroForm" enctype="multipart/form-data">
+      <form id="formCrearUsuario" enctype="multipart/form-data">
         <label for="tipo_usuario">Tipo de usuario:</label>
-       <select name="tipo" id="tipo_usuario">
-  <option value="">Selecciona el Tipo de usuario</option>
- <option id="adminOption" value="Admin" style="display: none;">Administrador</option>
-  <option value="anfitrion">Anfitrión</option>
-  <option value="Huesped">Huesped</option>
-</select>
+      <select name="tipo" id="tipo_usuario">
+        <option value="">Selecciona el Tipo de usuario</option>
+        <option id="adminOption" value="Admin">Administrador</option>
+        <option value="anfitrion">Anfitrión</option>
+        <option value="Huesped">Huésped</option>
+    </select>
         <br /><br />
 
         <label for="nombre">Nombre:</label>
@@ -110,7 +108,7 @@
 </footer>
 
 <!-- Al final del body -->
-<script src="../../js/registro.js"></script>
+<script src="../../js/crearusuario.js"></script>
   <!-- Ruta corregida: sube un nivel y busca login_admin.js en la carpeta js -->
 </body>
 </html>

@@ -2,45 +2,19 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <title>Panel del Administrador</title>
+  <title>Actualizar Usuario</title>
+  <link rel="icon" type="image/x-icon" href="../../img/logoprueba.png" />
   <link rel="stylesheet" href="../../css/styles.css" />
   <link rel="stylesheet" href="../../css/footer.css" />
   <style>
-    .tabla-usuarios {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 20px;
-    }
-    .tabla-usuarios th, .tabla-usuarios td {
-      border: 1px solid #ddd;
-      padding: 8px;
-      text-align: left;
-    }
-    .tabla-usuarios th {
-      background-color: #0f1c2f;
-      color: white;
-    }
-    .tabla-usuarios tr:nth-child(even) {
-      background-color: #f2f2f2;
-    }
-    .error-message {
-      color: red;
-      padding: 10px;
-      margin: 20px 0;
-      border: 1px solid red;
-      background-color: #ffeeee;
-    }
-    .loading {
-      padding: 20px;
-      font-style: italic;
-      color: #666;
-    }
+    .error { color: red; background: #ffeeee; padding: 10px; margin: 10px 0; }
+    .success { color: green; background: #eeffee; padding: 10px; margin: 10px 0; }
   </style>
 </head>
 <body>
   <header>
-    <img src="../../img/logoprueba.png" alt="Logo de LuminusCreaCode" width="100" />
-    <h2>Panel del Administrador</h2>
+    <img id="logo" src="../../img/logoprueba.png" alt="Logo de LuminusCreaCode" width="100"/>
+    <h1>Bienvenido a LuminusCrea Booking</h1>
     <nav>
       <a href="crear_Usuario.html">Crear Usuario</a>
       <a href="eliminar_Usuario.html">Eliminar Usuario</a>
@@ -50,26 +24,51 @@
   </header>
 
   <main>
-    <section>
-      <h3>Todos los usuarios Existentes</h3>
-      <div id="loading" class="loading">Cargando usuarios...</div>
-      <div id="error-message" class="error-message" style="display: none;"></div>
-      <table id="tabla-usuarios" class="tabla-usuarios" style="display: none;">
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Nombre</th>
-            <th>Correo</th>
-            <th>Teléfono</th>
-            <th>Rol</th>
-            <th>Fecha Registro</th>
-          </tr>
-        </thead>
-        <tbody id="cuerpo-tabla"></tbody>
-      </table>
-    </section>
+    <div id="actualizarFormContainer">
+      <h2>Actualizar Usuario</h2>
+      <div id="mensaje"></div>
+      
+      <form id="formActualizarUsuario" enctype="multipart/form-data">
+        <label for="tipo_usuario">Tipo de usuario:</label>
+        <select name="tipo" id="tipo_usuario" required>
+          <option value="">Selecciona el Tipo de usuario</option>
+          <option value="Admin">Administrador</option>
+          <option value="anfitrion">Anfitrión</option>
+          <option value="Huesped">Huésped</option>
+        </select>
+        <br /><br />
+
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" name="nombre" required /><br />
+
+        <label for="correo">Correo:</label>
+        <input type="email" id="correo" name="correo" required /><br />
+
+        <label for="password">Nueva Contraseña (dejar vacío para no cambiar):</label>
+        <input type="password" id="password" name="password" /><br />
+
+        <label for="telefono">Teléfono:</label>
+        <input type="tel" id="telefono" name="telefono" /><br />
+
+        <label for="genero">Género:</label>
+        <select name="genero" id="genero">
+          <option value="masculino">Masculino</option>
+          <option value="femenino">Femenino</option>
+          <option value="otro">Otro</option>
+        </select>
+        <br /><br />
+
+        <label for="origen">Origen:</label>
+        <input type="text" id="origen" name="origen" /><br />
+
+        <label for="fecha_nac">Fecha de nacimiento:</label>
+        <input type="date" id="fecha_nac" name="fecha_nac" /><br />
+
+        <button type="submit">Actualizar Usuario</button>
+      </form>
+    </div>
   </main>
-  
+
   <footer class="site-footer">
     <div class="footer-content">
       <p class="footer-title"><strong>O también puedes escribirnos a:</strong></p>
@@ -79,6 +78,6 @@
     </div>
   </footer>
 
-  <script src="../../js/usuarios.js"></script>
+  <script src="../../js/actualizarusuario.js"></script>
 </body>
 </html>
