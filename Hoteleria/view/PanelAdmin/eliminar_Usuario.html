@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Eliminar Usuario</title>
+  <link rel="icon" type="image/x-icon" href="../../img/logoprueba.png">
+  <link rel="stylesheet" href="../../css/styles.css">
+  <style>
+    .error { color: red; background: #ffeeee; padding: 10px; margin: 10px 0; }
+    .success { color: green; background: #eeffee; padding: 10px; margin: 10px 0; }
+    #confirmacion { display: none; margin-top: 20px; padding: 15px; border: 1px solid #ddd; }
+  </style>
+</head>
+<body>
+  <header>
+    <img id="logo" src="../../img/logoprueba.png" alt="Logo" width="100">
+    <h1>Eliminar Usuario</h1>
+    <nav>
+      <a href="crear_Usuario.html">Crear Usuario</a>
+      <a href="actualizar_Usuario.html">Actualizar Usuario</a>
+      <a href="buscar_Usuario.html">Buscar Usuario</a>
+    </nav>
+  </header>
+
+  <main>
+    <div id="eliminarFormContainer">
+      <h2>Eliminar Usuario por ID</h2>
+      <div id="mensaje"></div>
+      
+      <form id="formEliminarUsuario">
+        <label for="id_usuario">ID del Usuario a eliminar:</label>
+        <input type="number" id="id_usuario" name="id_usuario" required min="1">
+        
+        <button type="submit" id="btnEliminar">Eliminar Usuario</button>
+      </form>
+      
+      <div id="confirmacion">
+        <p>¿Está seguro que desea eliminar este usuario?</p>
+        <button id="btnConfirmar">Confirmar Eliminación</button>
+        <button id="btnCancelar">Cancelar</button>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <!-- Tu footer aquí -->
+  </footer>
+
+  <script src="../../js/eliminarusuario.js"></script>
+</body>
+</html>
